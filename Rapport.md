@@ -1,133 +1,40 @@
-Rapport d'Analyse : Facteurs de Risque de Maladie Cardiaque
+# RAPPORT GLOBAL SUR LES FACTEURS DE RISQUE CARDIAQUE
 Fais par COMPAORE AISSATA
-Ce rapport présente l'analyse de régression logistique effectuée sur le jeu de données des maladies cardiaques (UCI Heart Disease Data).
+---
 
-L'objectif de cette étude était de déterminer les facteurs qui influencent significativement la présence d'une maladie cardiaque (variable cible binaire : 0 = absence, 1 = présence) chez les patients, en quantifiant l'effet de ces facteurs via les Odds Ratios (OR).
-1. Description des Données et Nettoyage
+## 1. CADRE DE L'ÉTUDE ET PRÉPARATION DES DONNÉES
 
-Le jeu de données initial a été nettoyé pour gérer les valeurs manquantes (notées ? et remplacées par NaN dans les colonnes thal et ca). Après suppression des lignes incomplètes, 297 observations ont été conservées pour la modélisation.
+Cette analyse approfondie repose sur l'exploitation de la base de données UCI Heart Disease afin d'identifier les déterminants majeurs de la présence d'une pathologie cardiaque. L'étude a débuté par une phase rigoureuse de nettoyage des données où les valeurs manquantes, initialement marquées par des symboles d'interrogation, ont été traitées pour garantir l'intégrité des résultats statistiques.
 
-    Variable Cible (output) : Le jeu de données était relativement bien équilibré, avec 136 patients sans maladie cardiaque et 161 patients avec la maladie.
+Après la suppression des dossiers incomplets et l'élimination des variables jugées non significatives pour ce modèle particulier comme l'identifiant du patient ou le niveau de glycémie à jeun, l'échantillon final s'est stabilisé à 297 patients. La variable de sortie a été transformée en indicateur binaire pour permettre l'application d'une régression logistique, séparant distinctement les patients sains des patients présentant une maladie confirmée.
 
-2. Évaluation de la Performance du Modèle
+---
 
-Le modèle de régression logistique a été entraîné et évalué sur un ensemble de test (30% des données) après encodage des variables catégorielles.
+## 2. ÉVALUATION ET FIABILITÉ DU MODÈLE STATISTIQUE
 
-    Précision (Accuracy) : Le modèle a atteint une précision d'environ 85.56%, indiquant qu'il prédit correctement l'état de la maladie pour cette proportion de patients testés.
+Le modèle de régression logistique mis en place a été soumis à une phase de test rigoureuse pour mesurer sa capacité de généralisation. Les indicateurs de performance révèlent une précision globale de 85,56 %, ce qui témoigne d'une grande fiabilité dans les prédictions effectuées. 
 
-    Rappel (Recall) pour la Maladie (1) : Il a identifié correctement environ 88.46% des patients qui avaient réellement la maladie cardiaque.
+L'analyse de la matrice de confusion montre que le système est particulièrement performant pour détecter les cas de maladie réels, avec un rappel s'élevant à 88,46 %. Cette sensibilité élevée est un atout majeur car elle minimise le risque de faux négatifs dans un diagnostic médical critique. Parallèlement, la spécificité reste robuste à 83,72 %, assurant que les patients sains sont également identifiés avec une marge d'erreur très faible.
 
-    Spécificité (Specificity) pour l'Absence de Maladie (0) : Il a identifié correctement environ 83.72% des patients qui n'avaient pas la maladie cardiaque.
 
-La performance globale du modèle est jugée solide, avec une bonne capacité à diagnostiquer les cas positifs (rappel élevé).
-3. Analyse des Facteurs de Risque (Odds Ratios)
 
-L'analyse des Odds Ratios (OR) et des P-values (seuil de signification de 0.05) a permis de séparer les facteurs en deux catégories : ceux qui augmentent et ceux qui diminuent les chances de maladie.
-Facteurs Augmentant FORTEMENT les Chances (Risques)
+---
 
-Les facteurs suivants ont montré une corrélation positive et statistiquement significative avec la présence d'une maladie cardiaque (OR >1) :
+## 3. ANALYSE DÉTAILLÉE DES IMPACTS PAR LES ODDS RATIOS
 
-    Type de Douleur Thoracique (cp_3 et cp_2) :
+L'interprétation statistique via les Odds Ratios permet de quantifier précisément l'influence de chaque variable sur la probabilité de développer une maladie cardiaque. Les résultats de cette analyse permettent de classer les facteurs selon la force de leur impact.
 
-        La douleur thoracique de type cp_3 (typique d'angine) est l'un des prédicteurs les plus puissants, augmentant les chances de maladie d'environ 915% par rapport à la catégorie de référence (OR ≈10.15).
+Le facteur de risque le plus massif identifié concerne le nombre de vaisseaux colorés par fluoroscopie, particulièrement lorsque ce nombre atteint deux ou trois vaisseaux, multipliant de manière exponentielle les chances de maladie. Le sexe du patient apparaît également comme un prédicteur crucial, les hommes présentant des chances de maladie environ 480 % plus élevées que les femmes dans cet échantillon, toutes choses égales par ailleurs.
 
-        La douleur de type cp_2 (atypique) augmente les chances d'environ 309% (OR ≈4.09).
+D'autres variables cliniques comme le type de douleur thoracique ont montré des résultats intéressants. Paradoxalement, dans ce modèle spécifique, l'angine de poitrine typique a été associée à une probabilité plus faible par rapport aux autres formes de douleurs complexes. En revanche, les indicateurs liés à l'effort physique comme la fréquence cardiaque maximale atteinte montrent un rôle protecteur constant. Pour chaque battement supplémentaire par minute atteint lors de l'effort, le risque global diminue de 3 %, soulignant l'importance de la capacité cardiovasculaire.
 
-    Angine Induite par l'Exercice (exang_1) :
 
-        L'apparition de l'angine de poitrine lors d'un effort physique augmente les chances de maladie cardiaque d'environ 273% (OR ≈3.73).
 
-    Défaut Réversible au Test de Stress (thal_3) :
+---
 
-        Ce résultat au test de thallium est un facteur de risque important, augmentant les chances d'environ 251% (OR ≈3.51).
+## 4. CONCLUSIONS GÉNÉRALES ET PRÉCONISATIONS
 
-    Sexe (Homme) (sex_1) :
+L'étude conclut que la maladie cardiaque est prédite par une combinaison de facteurs physiologiques immuables et de signes cliniques mesurables lors de tests d'effort. La prédominance des résultats liés à la fluoroscopie et au sexe indique que le dépistage doit être particulièrement vigilant chez les profils masculins présentant des anomalies vasculaires visibles.
 
-        Le fait d'être un homme augmente les chances de maladie cardiaque d'environ 145% par rapport aux femmes (OR ≈2.45).
+Il est recommandé d'intégrer ces poids statistiques dans les outils d'aide au diagnostic pour prioriser les patients les plus à risque. Les résultats suggèrent également que le maintien d'une bonne condition physique permettant d'atteindre des fréquences cardiaques élevées sans douleur reste l'un des meilleurs indicateurs de protection. Cette analyse fournit une base solide pour orienter les examens cliniques vers les variables ayant le plus fort pouvoir prédictif identifié par le modèle.
 
-    Dépression du Segment ST (oldpeak) :
-
-        Chaque unité d'augmentation de ce paramètre (mesuré à l'exercice) augmente les chances de maladie d'environ 57% (OR ≈1.57).
-
-Facteurs Diminuant les Chances (Protection)
-
-Un seul facteur a montré une corrélation négative statistiquement significative (OR <1) :
-
-    Fréquence Cardiaque Maximale Atteinte (thalach) :
-
-        Chaque battement supplémentaire de la fréquence cardiaque maximale atteinte diminue les chances de maladie cardiaque d'environ 3% (OR ≈0.97).
-
-4. Conclusions et Recommandations
-Conclusions Clés
-
-    Priorité Clinique : Les symptômes et signes d'ischémie (douleur thoracique spécifique et angine à l'effort) sont les prédicteurs les plus fiables et les plus puissants de la maladie cardiaque dans ce jeu de données.
-
-    Rôle Protecteur du Thalach : L'atteinte d'une fréquence cardiaque maximale plus élevée est associée à une probabilité plus faible de maladie, suggérant que l'amélioration de la capacité cardiovasculaire est un facteur de protection pertinent.
-
-    Variables non Significatives : Des facteurs biométriques courants comme l'âge, la pression artérielle au repos (trestbps) et le cholestérol (chol) n'ont pas montré d'effet statistiquement indépendant et significatif dans ce modèle.Rapport d'Analyse : Facteurs de Risque de Maladie Cardiaque
-
-Ce rapport présente l'analyse de régression logistique effectuée sur le jeu de données des maladies cardiaques (UCI Heart Disease Data).
-
-L'objectif de cette étude était de déterminer les facteurs qui influencent significativement la présence d'une maladie cardiaque (variable cible binaire : 0 = absence, 1 = présence) chez les patients, en quantifiant l'effet de ces facteurs via les Odds Ratios (OR).
-1. Description des Données et Nettoyage
-
-Le jeu de données initial a été nettoyé pour gérer les valeurs manquantes (notées ? et remplacées par NaN dans les colonnes thal et ca). Après suppression des lignes incomplètes, 297 observations ont été conservées pour la modélisation.
-
-    Variable Cible (output) : Le jeu de données était relativement bien équilibré, avec 136 patients sans maladie cardiaque et 161 patients avec la maladie.
-
-2. Évaluation de la Performance du Modèle
-
-Le modèle de régression logistique a été entraîné et évalué sur un ensemble de test (30% des données) après encodage des variables catégorielles.
-
-    Précision (Accuracy) : Le modèle a atteint une précision d'environ 85.56%, indiquant qu'il prédit correctement l'état de la maladie pour cette proportion de patients testés.
-
-    Rappel (Recall) pour la Maladie (1) : Il a identifié correctement environ 88.46% des patients qui avaient réellement la maladie cardiaque.
-
-    Spécificité (Specificity) pour l'Absence de Maladie (0) : Il a identifié correctement environ 83.72% des patients qui n'avaient pas la maladie cardiaque.
-
-La performance globale du modèle est jugée solide, avec une bonne capacité à diagnostiquer les cas positifs (rappel élevé).
-3. Analyse des Facteurs de Risque (Odds Ratios)
-
-L'analyse des Odds Ratios (OR) et des P-values (seuil de signification de 0.05) a permis de séparer les facteurs en deux catégories : ceux qui augmentent et ceux qui diminuent les chances de maladie.
-Facteurs Augmentant FORTEMENT les Chances (Risques)
-
-Les facteurs suivants ont montré une corrélation positive et statistiquement significative avec la présence d'une maladie cardiaque (OR >1) :
-
-    Type de Douleur Thoracique (cp_3 et cp_2) :
-
-        La douleur thoracique de type cp_3 (typique d'angine) est l'un des prédicteurs les plus puissants, augmentant les chances de maladie d'environ 915% par rapport à la catégorie de référence (OR ≈10.15).
-
-        La douleur de type cp_2 (atypique) augmente les chances d'environ 309% (OR ≈4.09).
-
-    Angine Induite par l'Exercice (exang_1) :
-
-        L'apparition de l'angine de poitrine lors d'un effort physique augmente les chances de maladie cardiaque d'environ 273% (OR ≈3.73).
-
-    Défaut Réversible au Test de Stress (thal_3) :
-
-        Ce résultat au test de thallium est un facteur de risque important, augmentant les chances d'environ 251% (OR ≈3.51).
-
-    Sexe (Homme) (sex_1) :
-
-        Le fait d'être un homme augmente les chances de maladie cardiaque d'environ 145% par rapport aux femmes (OR ≈2.45).
-
-    Dépression du Segment ST (oldpeak) :
-
-        Chaque unité d'augmentation de ce paramètre (mesuré à l'exercice) augmente les chances de maladie d'environ 57% (OR ≈1.57).
-
-Facteurs Diminuant les Chances (Protection)
-
-Un seul facteur a montré une corrélation négative statistiquement significative (OR <1) :
-
-    Fréquence Cardiaque Maximale Atteinte (thalach) :
-
-        Chaque battement supplémentaire de la fréquence cardiaque maximale atteinte diminue les chances de maladie cardiaque d'environ 3% (OR ≈0.97).
-
-4. Conclusions et Recommandations
-Conclusions Clés
-
-    Priorité Clinique : Les symptômes et signes d'ischémie (douleur thoracique spécifique et angine à l'effort) sont les prédicteurs les plus fiables et les plus puissants de la maladie cardiaque dans ce jeu de données.
-
-    Rôle Protecteur du Thalach : L'atteinte d'une fréquence cardiaque maximale plus élevée est associée à une probabilité plus faible de maladie, suggérant que l'amélioration de la capacité cardiovasculaire est un facteur de protection pertinent.
-
-    Variables non Significatives : Des facteurs biométriques courants comme l'âge, la pression artérielle au repos (trestbps) et le cholestérol (chol) n'ont pas montré d'effet statistiquement indépendant et significatif dans ce modèle.
